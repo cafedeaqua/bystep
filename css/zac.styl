@@ -1,0 +1,52 @@
+// zac.styl
+$inner-padding = 4px 12px
+
+body
+	font-family '游ゴシック体', 'Yu Gothic', 'YuGothic', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif
+	-webkit-text-size-adjust none
+
+header
+	position fixed
+	top 0
+	left 0
+	width 100%
+	color #fff
+	font-size 14px
+
+img
+	vertical-align bottom
+
+#header_inner
+	position relative
+	padding $inner-padding
+
+#title
+	font-size 18px
+	font-weight bold
+
+#movie-detail
+	text-align center
+
+footer
+	position fixed
+	width 100%
+	bottom 0
+	left 0
+	color #fff
+
+#footer_inner
+	padding $inner-padding
+	text-align right
+	
+.yes_img
+	height 32px
+	width auto
+	padding-right 4px
+	vertical-align: sub;
+
+.no_img
+	@extend .yes_img
+	padding-left 8px
+
+#page
+	padding-left 12px
