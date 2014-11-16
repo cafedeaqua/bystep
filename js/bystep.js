@@ -18,12 +18,12 @@ var recipeObj ={
 
 //MEMO:動画を保存
 var movieObj = {
-  0:"./media/001.mp4",
-  1:"./media/002.mp4",
-  2:"./media/003.mp4",
-  3:"./media/004.mp4",
-  4:"./media/005.mp4",
-  5:"./media/006.mp4",
+  0:"http://www.zacfukuda.com/media/001.mp4",
+  1:"http://www.zacfukuda.com/media/002.mp4",
+  2:"http://www.zacfukuda.com/media/003.mp4",
+  3:"http://www.zacfukuda.com/media/004.mp4",
+  4:"http://www.zacfukuda.com/media/005.mp4",
+  5:"http://www.zacfukuda.com/media/006.mp4",
 };
 
 
@@ -382,10 +382,12 @@ function setMovie(){
   //MEMO:
   if(movieObj[movieNum - 1]){
     $("#movie-video").remove();
-    var videoTag = "<video id='movie-video' controls autoplay style='margin-top:50px' poster='' width='720' height='405'>";
+    var videoTag = "<video id='movie-video' controls autoplay style='margin-top:50px' poster='' width='720' height='405' onclick='this.play();'>";
     videoTag += "<source src=" + movieObj[movieNum - 1] + ">";
     videoTag += "</video>";
     $("#movie-detail").append(videoTag);
+    var video = document.getElementById('movie-video');
+    video.play();
     
   }else{
     //MEMO:調理終了時なので、調理方法画面に行く
