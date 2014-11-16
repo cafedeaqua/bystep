@@ -1,8 +1,102 @@
+
+//MEMO:recipeDataを全部格納
+var recipeObj ={
+  
+  //MEMO:recipe全部
+  allRecipeObj : null,
+  
+  //MEMO:recipeのBodyのObj
+  allRecipeBody: null,
+  
+  //MEMO:材料のObj
+  materialObj: null,
+  
+  //MEMO:調理方法Obj
+  articleObj: null,
+  
+};
+
+//画面遷移をカウント(0: タイトル　1:材料　2以降の偶数:動画　3以降の奇:Recipe)
+var sceneCounter = 0;
+
+/**
+ * Recipeが取得できたときのCallback
+ */
+function getRecipeCallback(){
+  
+  //MEMO:タイトルを表示
+  $("ingredient-title").attr("アクアパッツア");
+  
+  //MEMO:料理追加
+  
+  
+  //MEMOタイトル画面に遷移
+  changeNameContent();
+  
+}
+
+/**
+ * ロード完了時実行
+ */
+$(document).ready(function(){
+  
+  //MEMO:recipe取得
+  getKashikoiOkazu();
+   
+});
+
 /**
  * 画面を状況に応じて切り替える
+ * @param {boolean} flg true:縦振り　false:横振り
  */
-function changeContent(){
-	return true;
+function moveContent(flg){
+  
+  //MEMO:不具合対策
+  if(sceneCounter > 0)
+    return false;
+  
+  if(flg){
+    
+    //MEMO:縦振り
+    sceneCounter++;
+    
+  }else{
+    
+    //MEMO:横降り
+    sceneCounter--;
+    
+  }
+  
+  //sceneCounterにあわして画面表示を変更する
+  if(sceneCounter === 0){
+
+    //MEMO:タイトル画面
+    console.log("タイトル画面");
+    changeNameContent();
+    
+  }else if(sceneCounter === 1){
+    
+    //MEMO:材料画面
+    console.log("材料画面");
+    changeIngredientContent();
+    
+  }else{
+    
+    if(sceneCounter % 2 === 0){
+      console.log("動画画面　:　" + sceneCounter);
+      changeMovieContent();
+
+    }else if(sceneCounter % 2 === 1){
+      console.log("レシピ画面 : " + sceneCounter);
+      changeArticleContent();
+      
+    }
+    
+  }
+  
+  
+  return true;
+  
 }
 
 /**
@@ -33,7 +127,6 @@ function changeNameContent(){
 	changeContent("name-wrapper");
 }
 
-
 /**
  * 表示しているcontentを切り替える
  *
@@ -59,8 +152,6 @@ function changeContent(displayId){
     return true;
 
 }
-
-
 
 /**
  * かしこいおかず
@@ -116,16 +207,68 @@ function getKashikoiOkazu(foodName){
  */
 function purseRecipeData(xml){
   console.log("success");
-  console.log($(xml).find("response").find("result"));
-  console.log($(xml).find("response").find("result").find("doc"));
 
+  //MEMO:recipeの内容をpurseする
   $(xml).find("response").find("result").find("doc").each(function(i){
-    console.log($(this).find("Body").text());
     
+    //MEMO:全Dataを保持する。(Objの方は■で区切った配列(項目別))
+    recipeObj.allRecipeBody = $(this).find("Body").text();
+    recipeObj.allRecipeBody = recipeObj.allRecipeBody.replace("　【作り方】","■作り方");
+    recipeObj.allRecipeBody = recipeObj.allRecipeBody.replace("　【材料】","■材料");
+    recipeObj.allRecipeObj = recipeObj.allRecipeBody.split("■");
     
+    //MEMO:
+    var i = 0;
+    while(recipeObj.allRecipeObj[i++]){
+      if(recipeObj.allRecipeObj[i]){
+	console.log(recipeObj.allRecipeObj[i]);
+	
+	//MEMO:各要素をObjに含ませる
+	if(recipeObj.allRecipeObj[i].indexOf("材料") === 0){
+	  
+	  //MEMO:材料を格納)材料であれば、改行コードを<br/>に置換する.
+	  recipeObj.materialObj = recipeObj.allRecipeObj[i].replace(/[\n\r]/g,",");
+	  recipeObj.materialObj = recipeObj.materialObj.replace(/…/g,",");
+	  recipeObj.materialObj = recipeObj.materialObj.replace(/,,/g,",");
+	  recipeObj.materialObj = recipeObj.materialObj.split(",");
+	  var a = ["", "123", "abc", "xyz", "", "987", "hoge", "", "fuga", 0, undefined, false];
+	  recipeObj.materialObj = $.grep(recipeObj.materialObj, function(e){return e;});
+	  
+
+	}else if(recipeObj.allRecipeObj[i].indexOf("作り方") === 0){
+	  
+	  //MEMO:作り方を格納（作り方()であれば、「(x)」で切り分ける）
+	  recipeObj.articleObj = recipeObj.allRecipeObj[i];
+	  recipeObj.articleObj = recipeObj.articleObj.replace("（１）","(あ)");
+	  recipeObj.articleObj = recipeObj.articleObj.replace("（２）","(あ)");
+	  recipeObj.articleObj = recipeObj.articleObj.replace("（３）","(あ)");
+	  recipeObj.articleObj = recipeObj.articleObj.replace("（４）","(あ)");
+	  recipeObj.articleObj = recipeObj.articleObj.replace("（５）","(あ)");
+	  recipeObj.articleObj = recipeObj.articleObj.split("(あ)");
+	  
+	}
+	
+      }
+      
+    }
+
   });
   
+  //MEMO:処理完了時コール
+  getRecipeCallback();
+  
 }
+
+/**
+ * 次のRecipeを表示する
+ */
+function nextArticle(){
+  
+  
+  
+  
+}
+
 
 
 
