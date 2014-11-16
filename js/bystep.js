@@ -27,8 +27,8 @@ function getRecipeCallback(){
   //MEMO:タイトルを表示
   $("ingredient-title").attr("アクアパッツア");
   
-  //MEMO:料理追加
-  
+  //MEMO:材料画面を追加
+  setIngredient();
   
   //MEMOタイトル画面に遷移
   changeNameContent();
@@ -310,6 +310,36 @@ function setArticle(){
   console.log("artileNum -> " + artileNum);
   console.log(recipeObj.articleObj[artileNum]);
 
+}
+
+/**
+ * 材料画面を設定
+ */
+function setIngredient(){
+  
+  //MEMO:要素を削除
+  $(".ingredient-row").remove();
+  
+  //MEMO:材料を追加
+  for(var i = 1; i < recipeObj.materialObj.length; i++){
+    var ingredient;
+    ingredient = "<div class='ingredient-row'>";
+    ingredient += "<div class='material'>";
+    ingredient += recipeObj.materialObj[i];
+    ingredient += "</div>";
+    ingredient += "<div class='amount'>";
+    ingredient += recipeObj.materialObj[i+1];
+    ingredient += "</div>";
+  
+    $("#ingredient-detail").append(ingredient);
+    
+    i++;
+    
+  }
+  
+  
+  
+  
 }
 
 //-----------
