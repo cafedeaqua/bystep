@@ -120,7 +120,8 @@
 
 <script type="text/javascript">
   var windowHeight = $(window).height();
-  if ( windowHeight ) alert(windowHeight);
+  var screenHeight = screen.height;
+  if ( screenHeight ) alert(screenHeight);
   
   $(".content-wrapper").each( function () {
     $(this).css("height", windowHeight);
