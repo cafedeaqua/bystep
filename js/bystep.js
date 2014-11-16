@@ -18,12 +18,12 @@ var recipeObj ={
 
 //MEMO:動画を保存
 var movieObj = {
-  0:"./media/001.mp4",
-  1:"./media/002.mp4",
-  2:"./media/003.mp4",
-  3:"./media/004.mp4",
-  4:"./media/005.mp4",
-  5:"./media/006.mp4",
+  0:"http://www.zacfukuda.com/media/001.mp4",
+  1:"http://www.zacfukuda.com/media/002.mp4",
+  2:"http://www.zacfukuda.com/media/003.mp4",
+  3:"http://www.zacfukuda.com/media/004.mp4",
+  4:"http://www.zacfukuda.com/media/005.mp4",
+  5:"http://www.zacfukuda.com/media/006.mp4",
 };
 
 
