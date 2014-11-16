@@ -38,13 +38,18 @@ $(function(){
       && (lastAlpha < alpha - 25)
       && (gestureTime < new Date() - 1500)
     ){
-      //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+gamma);
+      //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+alpha);
       lastAlpha = null;
       gestureTime = new Date;
       moveContent(false); // 戻る動き
     }
     // それぞれのジャイロを記録していく
-    if((null === gotTime || null === lastGamma) || (gotTime < new Date - 200)){
+    if((
+      null === gotTime
+      || null === lastGamma
+      || null === lastAlpha)
+      || (gotTime < new Date - 200)
+    ){
       lastGamma = gamma;
       lastAlpha = alpha;
       gotTime = new Date();
