@@ -104,6 +104,9 @@ footer {
   color: #666;
   font-size: 90%;
 }
+#article-wrapper {
+  padding: 4px 12px;
+}
 #article-detail {
   font-size: 24px;
 }
