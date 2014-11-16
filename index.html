@@ -93,7 +93,7 @@
     <div class="content-wrapper" id="article-wrapper" style="display: none;">
 
       <div class="content-title" id="article-title">
-        title - article
+        ステップ1
       </div>
 
       <div class="content-detail" id="article-detail">
@@ -120,7 +120,8 @@
 
 <script type="text/javascript">
   var windowHeight = $(window).height();
-  console.log(windowHeight);
+  if ( windowHeight ) alert(windowHeight);
+  
   $(".content-wrapper").each( function () {
     $(this).css("height", windowHeight);
   });
