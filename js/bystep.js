@@ -387,7 +387,13 @@ function setMovie(){
     videoTag += "</video>";
     $("#movie-detail").append(videoTag);
     var video = document.getElementById('movie-video');
-    video.play();
+    //video.play();
+    
+    video.addEventListener("loadstart", showVideo, false);
+    function showVideo(e) {
+      video.play();
+    }
+
     
   }else{
     //MEMO:調理終了時なので、調理方法画面に行く
