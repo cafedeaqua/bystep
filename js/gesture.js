@@ -1,5 +1,5 @@
 $(function(){
-  var lastBeta = null;
+  var lastGamma = null;
   var gotTime = null;
   var gestureTime = new Date();
   var lastAlpha = null;
@@ -23,14 +23,14 @@ $(function(){
 
     // うなずきを検知する雑多な条件分岐
     if(
-      (null !== lastBeta)
-      && (lastBeta < beta - 15)
+      (null !== lastGamma)
+      && (lastGamma < gamma - 15)
       && (gestureTime < new Date() - 1500)
     ){
-      //alert("うなずき！<br>前回:"+lastBeta+"<br>今回:"+beta);
-      lastBeta = null;
+      //alert("うなずき！<br>前回:"+lastGamma+"<br>今回:"+gamma);
+      lastGamma = null;
       gestureTime = new Date;
-      changeArticleContent();
+      moveContent(true);
     }
     // 横振りを検知する雑多な条件分岐
     if(
@@ -38,15 +38,15 @@ $(function(){
       && (lastAlpha < alpha - 25)
       && (gestureTime < new Date() - 1500)
     ){
-      //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+beta);
+      //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+gamma);
       lastAlpha = null;
       gestureTime = new Date;
-      moveContent(); // 戻る動き
+      moveContent(false); // 戻る動き
     }
     // それぞれのジャイロを記録していく
-    if((null === gotTime || null === lastBeta) || (gotTime < new Date - 200)){
-      lastBeta = beta;
-      lastAlpha = beta;
+    if((null === gotTime || null === lastGamma) || (gotTime < new Date - 200)){
+      lastGamma = gamma;
+      lastAlpha = alpha;
       gotTime = new Date();
     }
 
