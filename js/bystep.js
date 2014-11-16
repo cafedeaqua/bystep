@@ -290,9 +290,17 @@ function setArticle(){
     $("#article-wrapper").append(articleDiv);
     
   }else{
+    
+    //MEMO:タイトルを設定
+    $("#article-title").remove();
+    var titleDiv = "<div class='content-title' id='article-title'>";
+    titleDiv += "調理終了";
+    titleDiv += "</div>";
+    $("#article-wrapper").append(titleDiv);
+    
     $("#article-detail").remove();
     var articleDiv = "<div class='content-detail' id='article-detail'>";
-    articleDiv += "以上です。";
+    articleDiv += "";
     articleDiv += "</div>";
     $("#article-wrapper").append(articleDiv);
     
@@ -303,14 +311,6 @@ function setArticle(){
   console.log(recipeObj.articleObj[artileNum]);
 
 }
-
-
-
-
-
-
-
-
 
 //-----------
 //TEST
