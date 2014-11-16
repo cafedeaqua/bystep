@@ -34,7 +34,7 @@ function getRecipeCallback(){
   changeNameContent();
   
 }
-
+ 
 /**
  * ロード完了時実行
  */
@@ -274,6 +274,15 @@ function setArticle(){
   }
   
   if(recipeObj.articleObj[artileNum]){
+    
+    //MEMO:タイトルを設定
+    $("#article-title").remove();
+    var titleDiv = "<div class='content-title' id='article-title'>";
+    titleDiv += "ステップ" + artileNum;
+    titleDiv += "</div>";
+    $("#article-wrapper").append(titleDiv);
+    
+    //MEMO:調理方法を設定
     $("#article-detail").remove();
     var articleDiv = "<div class='content-detail' id='article-detail'>";
     articleDiv += recipeObj.articleObj[artileNum];
