@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="HandheldFriendly" content="true">
   <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
   <title>ByStep</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
@@ -124,7 +124,7 @@
   if ( screenHeight ) alert(screenHeight);
   
   $(".content-wrapper").each( function () {
-    $(this).css("height", windowHeight);
+    $(this).css("height", 540);
   });
 
   var video = $("video");
