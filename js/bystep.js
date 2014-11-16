@@ -16,6 +16,17 @@ var recipeObj ={
   
 };
 
+//MEMO:動画を保存
+var movieObj = {
+  0:"./media/001.mp4",
+  1:"./media/002.mp4",
+  2:"./media/003.mp4",
+  3:"./media/004.mp4",
+  4:"./media/005.mp4",
+  5:"./media/006.mp4",
+};
+
+
 //画面遷移をカウント(0: タイトル　1:材料　2以降の偶数:動画　3以降の奇:Recipe)
 var sceneCounter = 0;
 
@@ -113,7 +124,9 @@ function moveContent(flg){
  * 動画画面に遷移する
  */
 function changeMovieContent(){
-	changeContent("movie-wrapper");
+  //MEMO:動画を設定
+  setMovie();
+  changeContent("movie-wrapper");
 }
 
 /**
@@ -346,9 +359,38 @@ function setIngredient(){
     i++;
     
   }
+   
+}
+
+/**
+ * 動画画面を設定
+ */
+function setMovie(){
   
+  var movieNum;
+  if(sceneCounter > 1){
+    movieNum = Math.ceil(sceneCounter / 2);
+  }else{
+    movieNum = 0;
+  }
   
+  console.log("setMovie : " + movieNum);
+  console.log("動画のURL " +  movieObj[movieNum - 1]);
   
+  //MEMO:
+  if(movieObj[movieNum - 1]){
+    $("#movie-video").remove();
+    var videoTag = "<video id='movie-video' controls autoplay style='margin-top:50px' poster='' width='7207 height='405'>";
+    videoTag += "<source src=" + movieObj[movieNum - 1] + ">";
+    videoTag += "</video>";
+    $("#movie-detail").append(videoTag);
+    
+  }else{
+    //MEMO:調理終了時なので、調理方法画面に行く
+    console.log("調理終了なので調理方法画面に遷移");
+    changeArticleContent();
+    
+  }
   
 }
 
