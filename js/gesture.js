@@ -41,7 +41,7 @@ $(function(){
       //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+beta);
       lastAlpha = null;
       gestureTime = new Date;
-      changeArticleContent();
+      moveContent(); // 戻る動き
     }
     // それぞれのジャイロを記録していく
     if((null === gotTime || null === lastBeta) || (gotTime < new Date - 200)){
