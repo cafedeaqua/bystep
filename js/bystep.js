@@ -42,7 +42,17 @@ $(document).ready(function(){
   
   //MEMO:recipe取得
   getKashikoiOkazu();
-   
+  
+  //MEMO:戻るボタン押下
+  $(".no_img").click(function(){
+    moveContent(false);
+  });
+
+  //MEMO:進むボタン押下
+  $(".yes_img").click(function(){
+    moveContent(true);
+  });
+  
 });
 
 /**
