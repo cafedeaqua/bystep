@@ -30,7 +30,7 @@ $(function(){
       //alert("うなずき！<br>前回:"+lastBeta+"<br>今回:"+beta);
       lastBeta = null;
       gestureTime = new Date;
-      moveContent();
+      changeArticleContent;
     }
     // 横振りを検知する雑多な条件分岐
     if(
@@ -41,7 +41,7 @@ $(function(){
       //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+beta);
       lastAlpha = null;
       gestureTime = new Date;
-      changeContent();
+      changeArticleContent;
     }
     // それぞれのジャイロを記録していく
     if((null === gotTime || null === lastBeta) || (gotTime < new Date - 200)){
