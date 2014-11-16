@@ -2,10 +2,12 @@
 package com.bystep;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,10 +46,13 @@ public class MainActivity extends Activity {
 
     // Docomo Q&A API キー
     static final String APIKEY = "523637367a33684575667753674c58524e4f6436414a6f4d74716678426d4f30576343594f4a6c36587a35";
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mContext = this;
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -60,6 +65,8 @@ public class MainActivity extends Activity {
 
         WebView webview = new WebView(this);
         setContentView(webview);
+
+        webview.getSettings().setJavaScriptEnabled(true);
 
         webview.setWebViewClient(new WebViewClient() {
         });
@@ -163,7 +170,7 @@ public class MainActivity extends Activity {
                     // FileInputStream stream = new
                     // FileInputStream(speechFile);
                     // FileDescriptor fd = stream.getFD();
-                    player.setDataSource(cacheSpeechFile);
+                    player.setDataSource(mContext, Uri.parse(cacheSpeechFile));
                     player.setOnPreparedListener(new OnPreparedListener() {
                         @Override
                         public void onPrepared(final MediaPlayer mp) {
