@@ -27,7 +27,7 @@ $(function(){
       && (lastGamma < gamma - 15)
       && (gestureTime < new Date() - 1500)
     ){
-      //alert("うなずき！<br>前回:"+lastGamma+"<br>今回:"+gamma);
+      alert("うなずき！<br>前回:"+lastGamma+"<br>今回:"+gamma);
       lastGamma = null;
       gestureTime = new Date;
       moveContent(true);
@@ -38,7 +38,7 @@ $(function(){
       && (lastAlpha < alpha - 25)
       && (gestureTime < new Date() - 1500)
     ){
-      //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+alpha);
+      alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+alpha);
       lastAlpha = null;
       gestureTime = new Date;
       moveContent(false); // 戻る動き
