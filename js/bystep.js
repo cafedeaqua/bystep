@@ -115,6 +115,8 @@ function moveContent(flg){
     
   }
   
+  //MEMO:フッターのCounterを調節
+  setFooter();
   
   return true;
   
@@ -380,7 +382,7 @@ function setMovie(){
   //MEMO:
   if(movieObj[movieNum - 1]){
     $("#movie-video").remove();
-    var videoTag = "<video id='movie-video' controls autoplay style='margin-top:50px' poster='' width='7207 height='405'>";
+    var videoTag = "<video id='movie-video' controls autoplay style='margin-top:50px' poster='' width='720' height='405'>";
     videoTag += "<source src=" + movieObj[movieNum - 1] + ">";
     videoTag += "</video>";
     $("#movie-detail").append(videoTag);
@@ -389,6 +391,28 @@ function setMovie(){
     //MEMO:調理終了時なので、調理方法画面に行く
     console.log("調理終了なので調理方法画面に遷移");
     changeArticleContent();
+    
+  }
+  
+}
+
+/**
+ * totalPageを更新
+ */
+function setFooter(){
+  var endNum = 12;
+  
+  $("#page").remove();
+  
+  if(endNum > sceneCounter){
+    var totalPage = "<span id='page'><span id='currentPage'><strong>" + sceneCounter + "</strong></span><small>/<small>";
+    totalPage += "<span id='totalPage'><small>" + endNum +  "</small></span></span>";
+    $("#footer_inner").append(totalPage);
+    
+  }else{
+    var totalPage = "<span id='page'>";
+    totalPage += "<span id='totalPage'><small>END</small></span></span>";
+    $("#footer_inner").append(totalPage);
     
   }
   
