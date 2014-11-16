@@ -3,6 +3,7 @@ $(function(){
   var gotTime = null;
   var gestureTime = new Date();
   var lastAlpha = null;
+  var lastBeta = null;
 
   window.addEventListener("devicemotion",function(evt){
     var x = evt.accelerationIncludingGravity.x; //横方向の傾斜
@@ -23,35 +24,47 @@ $(function(){
 
     // うなずきを検知する雑多な条件分岐
     if(
+      (null !== lastBeta)
+      && (lastBeta < beta - 15)
+      && (gestureTime < new Date() - 1500)
+    ){
+      //alert("うなずき！<br>前回:"+~~lastBeta+"<br>今回:"+~~beta);
+      lastBeta = null;
+      gestureTime = new Date;
+      moveContent(true);
+    }
+    /*if(
       (null !== lastGamma)
       && (lastGamma < gamma - 15)
       && (gestureTime < new Date() - 1500)
     ){
-      //alert("うなずき！<br>前回:"+lastGamma+"<br>今回:"+gamma);
+      alert("うなずき！<br>前回:"+lastGamma+"<br>今回:"+gamma);
       lastGamma = null;
       gestureTime = new Date;
       //moveContent(true);
-    }
+    }*/
     // 横振りを検知する雑多な条件分岐
     if(
-      (null !== lastAlpha)
-      && (lastAlpha < alpha - 25)
+      (null !== lastGamma)
+      //&& (Math.abs(gammma - lastGamma) > 20)
+      //&& !(Math.abs(gammma - lastGamma) < 180)
+      && (Math.abs(gammma) > 60)
       && (gestureTime < new Date() - 1500)
     ){
-      //alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+alpha);
-      lastAlpha = null;
+      //alert("横振り！<br>前回:"+~~lastGamma+"<br>今回:"+~~gammma);
+      lastGamma = null;
       gestureTime = new Date;
-      //moveContent(false); // 戻る動き
+      moveContent(false); // 戻る動き
     }
     // それぞれのジャイロを記録していく
     if((
       null === gotTime
-      || null === lastGamma
-      || null === lastAlpha)
+      || null === lastBeta
+      || null === lastGamma)
       || (gotTime < new Date - 200)
     ){
-      lastGamma = gamma;
-      lastAlpha = alpha;
+      lastBeta = beta;
+      lastGammma = gammma;
       gotTime = new Date();
     }
 
