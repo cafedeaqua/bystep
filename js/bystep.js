@@ -52,7 +52,7 @@ $(document).ready(function(){
 function moveContent(flg){
   
   //MEMO:不具合対策
-  if(sceneCounter > 0)
+  if(sceneCounter <= 0 && !flg)
     return false;
   
   if(flg){
@@ -110,7 +110,9 @@ function changeMovieContent(){
  * レシピ画面に遷移する
  */
 function changeArticleContent(){
-	changeContent("article-wrapper");
+  //MEMO:現在のレシピを表示
+  setArticle();
+  changeContent("article-wrapper");
 }
 
 /**
@@ -260,13 +262,37 @@ function purseRecipeData(xml){
 }
 
 /**
- * 次のRecipeを表示する
+ * 指定のRecipeを表示する
  */
-function nextArticle(){
+function setArticle(){
   
+  var artileNum;
+  if(sceneCounter > 1){
+    artileNum = Math.floor(sceneCounter / 2);
+  }else{
+    artileNum = 0;
+  }
   
-  
-  
+  if(recipeObj.articleObj[artileNum]){
+    $("#article-detail").remove();
+    var articleDiv = "<div class='content-detail' id='article-detail'>";
+    articleDiv += recipeObj.articleObj[artileNum];
+    articleDiv += "</div>";
+    $("#article-wrapper").append(articleDiv);
+    
+  }else{
+    $("#article-detail").remove();
+    var articleDiv = "<div class='content-detail' id='article-detail'>";
+    articleDiv += "以上です。";
+    articleDiv += "</div>";
+    $("#article-wrapper").append(articleDiv);
+    
+  }
+
+  console.log(recipeObj.articleObj);
+  console.log("artileNum -> " + artileNum);
+  console.log(recipeObj.articleObj[artileNum]);
+
 }
 
 
