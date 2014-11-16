@@ -86,7 +86,8 @@ footer {
   line-height: 1;
   border-bottom: 1px solid #8edad6;
 }
-#ingredient-detail {
+#ingredient-detail,
+#article-detail {
   margin-top: 12px;
 }
 .ingredient-row {
@@ -103,4 +104,10 @@ footer {
   float: right;
   color: #666;
   font-size: 90%;
+}
+#article-wrapper {
+  padding: 4px 12px;
+}
+#article-detail {
+  font-size: 24px;
 }
