@@ -382,7 +382,7 @@ function setMovie(){
   //MEMO:
   if(movieObj[movieNum - 1]){
     $("#movie-video").remove();
-    var videoTag = "<video id='movie-video' controls autoplay style='margin-top:50px' poster='' width='720' height='405'>";
+    var videoTag = "<video id='movie-video' controls autoplay style='margin-top:50px' poster='' width='720' height='405' onclick='this.play();'>";
     videoTag += "<source src=" + movieObj[movieNum - 1] + ">";
     videoTag += "</video>";
     $("#movie-detail").append(videoTag);
