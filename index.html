@@ -1,72 +1,135 @@
-<meta charset="UTF-8">
-<style>
-body{
-  font-size: 2.5em;
-}
-</style>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+  <title>ByStep</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/zac.css">
+  <script src="js/jquery-2.1.1.js"></script>
+  <script src="js/gesture.js"></script>
+  <script src="js/bystep.js"></script>
+</head>
+<body>
 
-<script>
-$(function(){
-  var lastGamma = null;
-  var gotTime = null;
-  var gestureTime = new Date();
-  var lastAlpha = null;
+  <header>
+    <div id="header_inner">
+      <h1 id="title"><img src="media/logo.png" alt="BYSTEP"></h1>
+    </div>
+  </header>
 
-  window.addEventListener("devicemotion",function(evt){
-    var x = evt.accelerationIncludingGravity.x; //横方向の傾斜
-    var y = evt.accelerationIncludingGravity.y; //縦方法の傾斜
-    var z = evt.accelerationIncludingGravity.z; //上下方向の傾斜
-    $("#result").html("x:"+x+"<br>y:"+y+"<br>z:"+z+"<br>lastGamma:"+lastGamma);
-  },false);
-  window.addEventListener('deviceorientation', function(event2) {
-    var alpha = event2.alpha;
-    var beta = event2.beta;
-    var gamma = event2.gamma;
+  <div class="contents">
 
-    orientationResult = 
-      "alpha："+ alpha +"<br>" +
-      "beta："+ beta +"<br>" + 
-      "gamma："+ gamma;
-    $("#result2").html(orientationResult);
+    <!-- 料理名画面 -->
+    <div class="content-wrapper" id="name-wrapper"  style="display: none;height:540px;">
+      <div class="content-detail" id="name-detail">
+        アクアパッツァ
+      </div>
+      <div style="text-align:center;margin-top:.5em">
+        <img src="media/nod_to_next.png" class="nod_to_next">頷いてレシピスタート
+      </div>
 
-    // うなずきを検知する雑多な条件分岐
-    if(
-      (null !== lastGamma)
-      && (lastGamma < gamma - 15)
-      && (gestureTime < new Date() - 1500)
-    ){
-      alert("うなずき！<br>前回:"+lastGamma+"<br>今回:"+gamma);
-      lastGamma = null;
-      gestureTime = new Date;
-      changeArticleContent();
-    }
-    // 横振りを検知する雑多な条件分岐
-    if(
-      (null !== lastAlpha)
-      && (lastAlpha < alpha - 25)
-      && (gestureTime < new Date() - 1500)
-    ){
-      alert("横振り！<br>前回:"+lastAlpha+"<br>今回:"+alpha);
-      lastAlpha = null;
-      gestureTime = new Date;
-      moveContent(); // 戻る動き
-    }
-    // それぞれのジャイロを記録していく
-    if((
-      null === gotTime
-      || null === lastGamma
-      || null === lastAlpha)
-      || (gotTime < new Date - 200)
-    ){
-      lastGamma = gamma;
-      lastAlpha = alpha;
-      gotTime = new Date();
-    }
+    </div>
 
-  }, true);
-});
-</script>
+    <!-- 材料画面 -->
+    <div class="content-wrapper" id="ingredient-wrapper"  style="display: none;">
 
-<div id="result"></div>
-<div id="result2"></div>
+      <div class="content-title" id="ingredient-title">
+        アクアパッツア
+      </div>
+
+      <div class="content-detail" id="ingredient-detail">
+        <div class="ingredient-row">
+          <div class="material">
+            材料1の名前
+          </div>
+          <div class="amount">
+            材料1の分量
+          </div>
+        </div>
+        <div class="ingredient-row">
+          <div class="material">
+            材料2の名前
+          </div>
+          <div class="amount">
+            材料2の分量
+          </div>
+        </div>
+        <div class="ingredient-row">
+          <div class="material">
+            材料3の名前
+          </div>
+          <div class="amount">
+            材料3の分量
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 動画画面 -->
+    <div class="content-wrapper" id="movie-wrapper" style="display: none; height:540px;">
+
+      <div class="content-title" id="movie-title">
+        <!-- title - movie -->
+      </div>
+
+      <div class="content-detail" id="movie-detail">
+        <video controls autoplay style="margin-top:56px" poster="" width="720" height="405">
+
+          <source src="media/sample.mp4">
+
+        </video>
+
+      </div>
+
+    </div>
+
+    <!-- 文章、レシピ -->
+    <div class="content-wrapper" id="article-wrapper" style="display: none;">
+
+      <div class="content-title" id="article-title">
+        ステップ1
+      </div>
+
+      <div class="content-detail" id="article-detail">
+        これを使えば料理が楽になります。
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <div id="footer_inner">
+      <span class="yes_no">
+        <img class="no_img" src="media/no_color.png"><span>戻る</span>
+        <img class="yes_img" src="media/yes_color.png"><span>次へ</span>
+      </span>
+      <span id="page">
+        <span id="currentPage"><strong>1</strong></span> <small>/<small>
+        <span id="totalPage"><small>12</small></span>
+      </span>
+
+    </div>
+  </footer>
+
+<script type="text/javascript">
+  /*var windowHeight = $(window).height();
+  var screenHeight = 540;
+  if ( screenHeight ) alert(screenHeight);
+  
+  $(".content-wrapper").each( function () {
+    $(this).css("height", 540);
+  });
+
+  var video = $("video");
+  $(video).css("margin-top", function () {
+    var _height = $(this).height();
+    return ( windowHeight - _height)/2;
+  });*/
+
