@@ -5,6 +5,11 @@ body
 	font-family '游ゴシック体', 'Yu Gothic', 'YuGothic', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif
 	-webkit-text-size-adjust none
 
+strong
+	font-weight bold
+small
+	font-size 75%
+
 header
 	position fixed
 	top 0
@@ -32,20 +37,20 @@ footer
 	width 100%
 	bottom 0
 	left 0
-	color #fff
+	color #ccc
 
 #footer_inner
 	padding $inner-padding
 	text-align right
 	
-.yes_img
+.no_img
 	height 32px
 	width auto
 	padding-right 4px
 	vertical-align: sub;
 
-.no_img
-	@extend .yes_img
+.yes_img
+	@extend .no_img
 	padding-left 8px
 
 #page
